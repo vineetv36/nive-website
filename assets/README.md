@@ -1,14 +1,7 @@
-# Drop your full-resolution photographs here
+# Portfolio images
 
-Use these filenames:
+The supplied photographs and artwork are organized into 11 album folders. Preserve these originals: do not overwrite them with resized or recompressed copies.
 
-- `europe.jpg`
-- `botanical.jpg`
-- `san-francisco.jpg`
-- `liquid-lens.jpg`
+`image-manifest.json` records the supplied inventory. `optimized/` contains separate generated previews. The website uses explicit links in the root `index.html`; adding a file alone does not add it to an album gallery.
 
-Keep filename case exactly as shown. Use actual JPEG files, not renamed HEIC or RAW files. Other browser-compatible formats are fine if Codex updates the image paths.
-
-Add or replace these files and reload the website. Missing photographs display neutral placeholders and are excluded from the lightbox. See the root `README.md` for preview instructions, other image formats, and adding gallery entries.
-
-Originals should remain unmodified. Optional optimized copies belong in an `optimized/` subfolder. See `context.md` for the full image-handling requirements.
+See the root `README.md` for album contents, photo replacement, adding entries, and refreshing previews after changes.

@@ -1,48 +1,70 @@
 # Nive Manohar — Field Notes
 
-A responsive, static photography portfolio built with HTML, CSS, and vanilla JavaScript. No dependencies, compilation, APIs, or remotely hosted assets.
+A responsive static portfolio in HTML, CSS, and vanilla JavaScript. The collection contains 112 supplied images in 11 albums. There are no runtime dependencies, APIs, remote fonts, or mandatory build steps.
 
-## Preview
+## Preview and hosting
 
-Open `index.html` directly in a browser, or run from this directory:
+Open `index.html` directly, or run from the repository root:
 
 ```sh
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Visit port 8000 on your local machine. The site also works under a subdirectory. No routing or server configuration is required.
+The site uses relative paths and supports subdirectory hosting. Upload `index.html`, `styles.css`, `script.js`, and `assets/` together. No routing rules or backend are needed. `context.md`, `reference/`, and `tools/` do not need to be deployed.
 
-## Add or replace photographs
+## Collection
 
-Put the owner's original photographs at these exact, case-sensitive paths and refresh the page:
+The opening gallery uses the supplied photos that match the design reference:
 
-| Path | Series |
+| Cover | Original |
 | --- | --- |
-| `assets/europe.jpg` | Europe |
-| `assets/botanical.jpg` | Botanical |
-| `assets/san-francisco.jpg` | San Francisco |
-| `assets/liquid-lens.jpg` | Liquid Lens |
+| Europe | `assets/Europe/007.webp` |
+| Botanical | `assets/Botanical/003.webp` |
+| San Francisco | `assets/San-Francisco/003.webp` |
+| Liquid Lens | `assets/Liquid-Lens/001.webp` |
 
-No photographs were supplied with this project. Missing files display neutral series placeholders and are excluded from the JavaScript lightbox. Adding a file and reloading restores its photo link automatically. If the browser caches an older photo, use a hard refresh. Originals are used directly, with no optimized derivatives to regenerate or become stale.
+Below the opening gallery, **The collection** lists every album. Expand an album to see all its images. Clicking a cover or album thumbnail opens the original image uncropped; previous/next and arrow keys stay within that album in numbered-file order. Escape and the close button restore focus and page scrolling. Without JavaScript, albums still expand and image links open originals normally.
 
-Use actual JPEG files at the default paths. PNG, WebP, and AVIF also work: update both the link's `href` and the nested object's `data` in `index.html`, plus its MIME `type` (`image/png`, `image/webp`, or `image/avif`). Convert HEIC or camera RAW to a browser format; changing a filename extension does not convert an image. Preserve your originals. Any future optimized derivatives should go in `assets/optimized/` and must not overwrite originals.
+| Folder | Images |
+| --- | ---: |
+| `Europe` | 23 |
+| `Botanical` | 8 |
+| `San-Francisco` | 5 |
+| `Liquid-Lens` | 12 |
+| `3D-Investigations` | 12 |
+| `Lifecycle-of-a-Seedling` | 11 |
+| `Light-on-Head` | 10 |
+| `Reconstructive-Oranges` | 10 |
+| `Refill-9PM` | 11 |
+| `Tomb` | 7 |
+| `Vascular-Anatomy` | 3 |
 
-Check each photo's description against your supplied image. Update both `data-alt` and the object's `aria-label` if needed. The current descriptions come from the brief. Edit `data-title` for the lightbox title and the placeholder/caption text for visible labels.
+## Maintain photographs
 
-To add more photographs, duplicate a `figure` in the clearly marked gallery section of `index.html`, update its paths and labels, and extend the desktop grid rules in `styles.css` as needed. There is no automatic folder scanning. Keep the DOM in the intended reading order.
+All supplied files remain unchanged in their album folders. `assets/image-manifest.json` is the supplied source inventory; it is not fetched at runtime. Gallery links are explicitly listed in `index.html` so the site needs no directory scanning or local JSON requests.
 
-## Interaction and editing
+To replace a photo, replace its original at the same case-sensitive path and refresh its preview using the optional command below, then hard-refresh the browser. Update `width`, `height`, `alt`, and `data-alt` in the HTML if the replacement changes dimensions or subject. To change format, update the original link's `href` as well. Use actual JPEG, WebP, PNG, or AVIF files; convert HEIC/RAW instead of renaming their extensions.
 
-Available photographs link to their original files, including when JavaScript is disabled. JavaScript enhances these links into a native dialog with an uncropped image, previous/next buttons, arrow-key navigation, Escape to close, contained focus, and focus return. Missing photos remain placeholders. Mobile images use their natural proportions once loaded.
+To add an image, duplicate a `figure` in its album's `album-grid`, update its paths, `data-index`, descriptions, dimensions, and visible number, and update the album's counts. Keep `data-album` identical within an album. To add an album, duplicate a `details.album` section and use a new album ID and `data-album` value. New files are not discovered automatically.
 
-Edit the About and Contact sections in `index.html`. Only the supplied Behance profile is linked; add a real `mailto:` link in Contact when an address is available. Fonts use local system stacks. `reference/option-3.png` is a design reference, not a site image.
+## Optional previews
 
-## Static hosting
+`assets/optimized/` contains generated WebP previews, about 3.9 MB combined versus 86 MB of supplied originals. Featured previews fit within 1280px; other previews fit within 640px. Originals are always the lightbox and normal link targets. Below-the-fold thumbnails load lazily. If a preview is absent, JavaScript retries the original; if the original is also missing, it shows the series placeholder and excludes the unavailable photo from navigation.
 
-Upload `index.html`, `styles.css`, `script.js`, and `assets/` together, preserving their relative paths. No build command, backend, redirects, or deployment service is required. The brief and reference directory need not be published. This project does not deploy itself.
+After replacing originals, regenerate previews from the repository root:
 
-## Checks
+```sh
+# Optional image-maintenance dependency, not needed to view or host the site:
+python3 -m pip install Pillow
+python3 tools/refresh_previews.py
+```
 
-At desktop (1536 × 1024), tablet (768px), and mobile (390px), check navigation, overflow, photo captions, and keyboard focus. Check missing photographs, then add real images at the documented paths and reload. Open each available image; check next/previous, arrow keys, Tab/Shift+Tab, Escape, focus return, and restored page scrolling. Also check direct local-file loading and hosting beneath a subdirectory. With JavaScript disabled, available images should still open as ordinary links.
+This command reads the photo paths in `index.html` and writes only beneath `assets/optimized/`. It never overwrites originals. Commit changed previews alongside updated originals to avoid stale thumbnails. To omit a preview permanently, point its `<img src>` to the original and remove that photo from the optional regeneration workflow (the script deliberately refuses to overwrite originals).
 
-Implementation validation: Chromium checks passed at widths of 320, 390, 600, 768, 1100, and 1536px, including navigation, placeholders, subdirectory hosting, keyboard lightbox controls, focus/scroll restoration, single-photo galleries, image-load failures, reduced motion, and no-JavaScript links. Photo interactions were checked with temporary image fixtures outside the repository; no owner photographs were supplied. Direct `file://` navigation could not be tested because the managed browser blocks it. The site uses relative URLs and classic scripts without runtime API requests.
+Edit About and Contact in `index.html`. The supplied Behance profile is linked; add a real email address there when available. The reference image is kept separate from site artwork.
+
+## Validation
+
+Verified all 112 thumbnails and original images in Chromium, album order and wraparound, keyboard focus and scroll restoration, layouts at 320/390/768/1536px, no-JavaScript album links, and missing-preview/original fallbacks. Initial page loading requests only the four cover previews. Preview regeneration was run and all original files still match the supplied SHA-256 inventory.
+
+Check desktop, tablet, and mobile layouts; open each album; navigate its images with buttons and arrow keys; test Tab, Shift+Tab, Escape, focus return, and scroll restoration. Check ordinary image links with JavaScript disabled and subdirectory hosting. Direct `file://` navigation is blocked by the managed test browser, so direct-file loading remains unverified in this environment.

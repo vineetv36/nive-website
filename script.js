@@ -13,56 +13,74 @@
   let trigger = null;
   let savedOverflow = '';
 
-  const available = () => photos.filter(photo => photo.dataset.available === 'true');
+  // Featured covers and album thumbnails can refer to the same original.
+  function available() {
+    const unique = new Map();
+    photos.filter(photo => photo.dataset.album === current?.dataset.album && photo.dataset.available !== 'false')
+      .forEach(photo => {
+        if (!unique.has(photo.dataset.source)) unique.set(photo.dataset.source, photo);
+      });
+    return [...unique.values()].sort((a, b) => Number(a.dataset.index) - Number(b.dataset.index));
+  }
 
   function markMissing(photo) {
-    photo.dataset.available = 'false';
-    photo.removeAttribute('href');
-    photo.setAttribute('aria-disabled', 'true');
-    photo.setAttribute('aria-label', `${photo.dataset.title} photograph is not yet available`);
-    photo.querySelector('object, img')?.remove();
+    photos.filter(item => item.dataset.source === photo.dataset.source).forEach(item => {
+      item.dataset.available = 'false';
+      item.removeAttribute('href');
+      item.setAttribute('aria-disabled', 'true');
+      item.setAttribute('aria-label', `${item.dataset.title} photograph ${item.dataset.index} is not available`);
+      item.querySelector('img')?.remove();
+    });
   }
 
   function showPhoto(photo) {
     current = photo;
+    image.style.opacity = '0';
+    image.setAttribute('aria-busy', 'true');
     image.alt = photo.dataset.alt;
     image.src = photo.dataset.source;
     title.textContent = photo.dataset.title;
     const items = available();
-    status.textContent = `${photo.dataset.title} · ${items.indexOf(photo) + 1} / ${items.length}`;
+    const index = items.findIndex(item => item.dataset.source === photo.dataset.source);
+    status.textContent = `${photo.dataset.title} · ${index + 1} / ${items.length}`;
     previous.disabled = next.disabled = items.length < 2;
   }
 
   function move(direction) {
     const items = available();
-    if (items.length) showPhoto(items[(items.indexOf(current) + direction + items.length) % items.length]);
+    const index = items.findIndex(item => item.dataset.source === current.dataset.source);
+    if (items.length) showPhoto(items[(index + direction + items.length) % items.length]);
   }
 
   photos.forEach(photo => {
-    const source = photo.getAttribute('href');
-    photo.dataset.source = source;
-    // Keep a neutral fallback until the actual local file has loaded successfully.
-    markMissing(photo);
-    const original = new Image();
-    original.alt = photo.dataset.alt;
-    original.decoding = 'async';
-    original.addEventListener('load', () => {
-      photo.dataset.available = 'true';
-      photo.href = source;
-      photo.removeAttribute('aria-disabled');
-      photo.setAttribute('aria-label', `View ${photo.dataset.title} photograph`);
-      photo.style.setProperty('--photo-ratio', `${original.naturalWidth} / ${original.naturalHeight}`);
-      photo.append(original);
-    }, { once: true });
-    original.addEventListener('error', () => markMissing(photo), { once: true });
-    original.src = source;
+    photo.dataset.source = photo.getAttribute('href');
+    const preview = photo.querySelector('img');
+    photo.style.setProperty('--photo-ratio', `${preview.getAttribute('width')} / ${preview.getAttribute('height')}`);
+    const loaded = () => {
+      if (preview.isConnected) photo.dataset.available = 'true';
+    };
+    const failed = () => {
+      // Derivatives are optional: retry the untouched original if a preview is absent.
+      if (!preview.dataset.originalFallback) {
+        preview.dataset.originalFallback = 'true';
+        preview.src = photo.dataset.source;
+      } else {
+        markMissing(photo);
+      }
+    };
+    preview.addEventListener('load', loaded);
+    preview.addEventListener('error', failed);
+    if (preview.complete) {
+      if (preview.naturalWidth) loaded();
+      else failed();
+    }
 
     photo.addEventListener('click', event => {
-      if (photo.dataset.available !== 'true') {
+      if (photo.dataset.available === 'false') {
         event.preventDefault();
         return;
       }
-      // Preserve native links for unsupported browsers and modified clicks.
+      // Preserve ordinary original-image links and modified clicks.
       if (typeof dialog.showModal !== 'function' || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
       event.preventDefault();
       trigger = photo;
@@ -74,6 +92,10 @@
     });
   });
 
+  image.addEventListener('load', () => {
+    image.style.opacity = '1';
+    image.removeAttribute('aria-busy');
+  });
   close.addEventListener('click', () => dialog.close());
   previous.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
@@ -83,6 +105,7 @@
   dialog.addEventListener('close', () => {
     document.documentElement.style.overflow = savedOverflow;
     image.removeAttribute('src');
+    image.removeAttribute('aria-busy');
     trigger?.focus({ preventScroll: true });
   });
   dialog.addEventListener('keydown', event => {
@@ -105,10 +128,9 @@
   });
   image.addEventListener('error', () => {
     if (!dialog.open || !current) return;
-    const failed = current;
     const items = available();
-    const index = items.indexOf(failed);
-    markMissing(failed);
+    const index = Math.max(0, items.findIndex(item => item.dataset.source === current.dataset.source));
+    markMissing(current);
     const remaining = available();
     if (remaining.length) showPhoto(remaining[index % remaining.length]);
     else dialog.close();
