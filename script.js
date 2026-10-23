@@ -13,6 +13,47 @@
   let trigger = null;
   let savedOverflow = '';
 
+  const work = document.querySelector('.selected-work');
+  const cards = [...work.querySelectorAll('.work-card')];
+  const filters = [...work.querySelectorAll('.work-filter')];
+  const surprise = work.querySelector('.surprise');
+  const canOpenDialog = typeof dialog.showModal === 'function';
+  // Keep the full album library browsable without JavaScript or dialog support.
+  if (canOpenDialog) work.classList.add('gallery-enhanced');
+  work.querySelector('.work-filters').hidden = false;
+  surprise.hidden = !canOpenDialog;
+
+  filters.forEach(button => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    filters.forEach(item => {
+      const selected = item === button;
+      item.classList.toggle('is-active', selected);
+      item.setAttribute('aria-pressed', String(selected));
+    });
+    let slot = 0;
+    cards.forEach(card => {
+      card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      if (!card.hidden) card.dataset.slot = String(slot++ % 9 + 1);
+    });
+    work.querySelector('#filter-status').textContent = `${slot} ${slot === 1 ? 'album' : 'albums'} shown`;
+  }));
+
+  function openPhoto(photo, focusTarget = photo) {
+    trigger = focusTarget;
+    showPhoto(photo);
+    savedOverflow = document.documentElement.style.overflow;
+    dialog.showModal();
+    document.documentElement.style.overflow = 'hidden';
+    close.focus();
+  }
+
+  surprise.addEventListener('click', () => {
+    const choices = cards.filter(card => !card.hidden)
+      .map(card => card.querySelector('[data-photo]'))
+      .filter(photo => photo.dataset.available !== 'false');
+    if (choices.length) openPhoto(choices[Math.floor(Math.random() * choices.length)], surprise);
+  });
+
   // Featured covers and album thumbnails can refer to the same original.
   function available() {
     const unique = new Map();
@@ -81,14 +122,9 @@
         return;
       }
       // Preserve ordinary original-image links and modified clicks.
-      if (typeof dialog.showModal !== 'function' || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      if (!canOpenDialog || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
       event.preventDefault();
-      trigger = photo;
-      showPhoto(photo);
-      savedOverflow = document.documentElement.style.overflow;
-      dialog.showModal();
-      document.documentElement.style.overflow = 'hidden';
-      close.focus();
+      openPhoto(photo);
     });
   });
 

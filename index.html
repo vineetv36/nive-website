@@ -68,9 +68,119 @@
 
       <a class="invitation" href="#observations"><span>What catches your eye?</span><svg viewBox="0 0 48 28" aria-hidden="true" focusable="false"><path d="M2 14h41M30 3l14 11-14 11"/></svg></a>
 
-      <section id="albums" class="albums" aria-labelledby="albums-title">
-        <div class="albums-heading"><h2 id="albums-title">The collection</h2><p>11 albums / 112 photographs</p></div>
-        <!-- ALBUMS: Add explicit photo links here; no runtime manifest or directory fetch. -->
+      <section id="albums" class="selected-work" aria-labelledby="albums-title">
+        <div class="work-head">
+          <div>
+            <div class="work-label"><span>01</span> Selected observations</div>
+            <h2 class="work-title" id="albums-title">Things worth<br><em>a second look.</em></h2>
+          </div>
+          <div class="work-intro">
+            <p>Eleven albums from an ongoing collection of places, reflections, passing moments, and experiments.</p>
+            <div class="work-filters" role="group" aria-label="Filter albums" hidden>
+              <button class="work-filter is-active" type="button" data-filter="all" aria-pressed="true">All <sup>11</sup></button>
+              <button class="work-filter" type="button" data-filter="places" aria-pressed="false">Places &amp; nature <sup>03</sup></button>
+              <button class="work-filter" type="button" data-filter="people" aria-pressed="false">People <sup>01</sup></button>
+              <button class="work-filter" type="button" data-filter="experiments" aria-pressed="false">Experiments <sup>07</sup></button>
+            </div>
+            <p class="visually-hidden" id="filter-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="work-grid">
+          <!-- ALBUM COVERS: Each card opens the full album; the library below lists every original. -->
+          <article class="work-card" data-category="places" data-slot="1">
+            <a class="photo frame-media frame--wide" data-preview-size="1280" href="assets/Europe/005.webp" data-photo data-album="Europe" data-index="5" data-title="Europe" data-alt="An elevated view across a river, bridges, and the city beneath clouds." aria-label="View Europe album, 23 photographs">
+                <span class="placeholder" aria-hidden="true">Europe / 005</span>
+                <img src="assets/optimized/Europe/005.webp" width="3840" height="2880" alt="An elevated view across a river, bridges, and the city beneath clouds." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">01</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Europe</h3><p>23 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="people" data-slot="2">
+            <a class="photo frame-media frame--portrait" data-preview-size="1280" href="assets/Light-on-Head/001.webp" data-photo data-album="Light-on-Head" data-index="1" data-title="Light on Head" data-alt="Black-and-white portrait with hair falling across the face." aria-label="View Light on Head album, 10 photographs">
+                <span class="placeholder" aria-hidden="true">Light on Head / 001</span>
+                <img src="assets/optimized/Light-on-Head/001.webp" width="2432" height="3648" alt="Black-and-white portrait with hair falling across the face." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">02</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Light on Head</h3><p>10 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="3">
+            <a class="photo frame-media frame--portrait" data-preview-size="1280" href="assets/Refill-9PM/003.webp" data-photo data-album="Refill-9PM" data-index="3" data-title="Refill@9PM" data-alt="A coffee station with a bottle and diagonally framed signs." aria-label="View Refill@9PM album, 11 photographs">
+                <span class="placeholder" aria-hidden="true">Refill@9PM / 003</span>
+                <img src="assets/optimized/Refill-9PM/003.webp" width="1269" height="952" alt="A coffee station with a bottle and diagonally framed signs." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">03</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Refill@9PM</h3><p>11 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="places" data-slot="4">
+            <a class="photo frame-media frame--landscape" data-preview-size="1280" href="assets/San-Francisco/003.webp" data-photo data-album="San-Francisco" data-index="3" data-title="San Francisco" data-alt="A suspension bridge across the bay, viewed from a waterfront promenade." aria-label="View San Francisco album, 5 photographs">
+                <span class="placeholder" aria-hidden="true">San Francisco / 003</span>
+                <img src="assets/optimized/San-Francisco/003.webp" width="2592" height="1456" alt="A suspension bridge across the bay, viewed from a waterfront promenade." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">04</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>San Francisco</h3><p>5 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="5">
+            <a class="photo frame-media frame--tall" data-preview-size="1280" href="assets/3D-Investigations/003.webp" data-photo data-album="3D-Investigations" data-index="3" data-title="3D Investigations" data-alt="A tall open sculpture with branching pale supports." aria-label="View 3D Investigations album, 12 photographs">
+                <span class="placeholder" aria-hidden="true">3D Investigations / 003</span>
+                <img src="assets/optimized/3D-Investigations/003.webp" width="3000" height="4000" alt="A tall open sculpture with branching pale supports." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">05</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>3D Investigations</h3><p>12 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="places" data-slot="6">
+            <a class="photo frame-media frame--landscape" data-preview-size="1280" href="assets/Botanical/003.webp" data-photo data-album="Botanical" data-index="3" data-title="Botanical" data-alt="Purple water lilies among bright lily pads reflected in a pond." aria-label="View Botanical album, 8 photographs">
+                <span class="placeholder" aria-hidden="true">Botanical / 003</span>
+                <img src="assets/optimized/Botanical/003.webp" width="2592" height="1456" alt="Purple water lilies among bright lily pads reflected in a pond." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">06</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Botanical</h3><p>8 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="7">
+            <a class="photo frame-media frame--square" data-preview-size="1280" href="assets/Liquid-Lens/001.webp" data-photo data-album="Liquid-Lens" data-index="1" data-title="Liquid Lens" data-alt="Translucent rectangular forms arranged as an experimental still life." aria-label="View Liquid Lens album, 12 photographs">
+                <span class="placeholder" aria-hidden="true">Liquid Lens / 001</span>
+                <img src="assets/optimized/Liquid-Lens/001.webp" width="3264" height="2448" alt="Translucent rectangular forms arranged as an experimental still life." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">07</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Liquid Lens</h3><p>12 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="8">
+            <a class="photo frame-media frame--landscape" data-preview-size="1280" href="assets/Lifecycle-of-a-Seedling/010.webp" data-photo data-album="Lifecycle-of-a-Seedling" data-index="10" data-title="Lifecycle of a Seedling" data-alt="A low sculptural form with layered folds and rounded protrusions." aria-label="View Lifecycle of a Seedling album, 11 photographs">
+                <span class="placeholder" aria-hidden="true">Lifecycle of a Seedling / 010</span>
+                <img src="assets/optimized/Lifecycle-of-a-Seedling/010.webp" width="1936" height="2592" alt="A low sculptural form with layered folds and rounded protrusions." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">08</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Lifecycle of a Seedling</h3><p>11 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="9">
+            <a class="photo frame-media frame--tall" data-preview-size="1280" href="assets/Reconstructive-Oranges/005.webp" data-photo data-album="Reconstructive-Oranges" data-index="5" data-title="Reconstructive Oranges" data-alt="Detail of a peeled orange repaired with colored thread." aria-label="View Reconstructive Oranges album, 10 photographs">
+                <span class="placeholder" aria-hidden="true">Reconstructive Oranges / 005</span>
+                <img src="assets/optimized/Reconstructive-Oranges/005.webp" width="3264" height="2448" alt="Detail of a peeled orange repaired with colored thread." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">09</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Reconstructive Oranges</h3><p>10 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="1">
+            <a class="photo frame-media frame--wide" data-preview-size="1280" href="assets/Tomb/001.webp" data-photo data-album="Tomb" data-index="1" data-title="Tomb" data-alt="Books, framed images, and objects arranged on a floor with scattered red petals." aria-label="View Tomb album, 7 photographs">
+                <span class="placeholder" aria-hidden="true">Tomb / 001</span>
+                <img src="assets/optimized/Tomb/001.webp" width="2448" height="3264" alt="Books, framed images, and objects arranged on a floor with scattered red petals." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">10</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Tomb</h3><p>7 photographs<span>View album</span></p></div>
+          </article>
+          <article class="work-card" data-category="experiments" data-slot="2">
+            <a class="photo frame-media frame--portrait" data-preview-size="1280" href="assets/Vascular-Anatomy/001.webp" data-photo data-album="Vascular-Anatomy" data-index="1" data-title="Vascular Anatomy" data-alt="A branching anatomical composition against a mottled green background." aria-label="View Vascular Anatomy album, 3 photographs">
+                <span class="placeholder" aria-hidden="true">Vascular Anatomy / 001</span>
+                <img src="assets/optimized/Vascular-Anatomy/001.webp" width="433" height="603" alt="A branching anatomical composition against a mottled green background." loading="lazy" decoding="async">
+              <span class="frame-index" aria-hidden="true">11</span><span class="view-tag" aria-hidden="true">View album <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></span>
+              </a>
+            <div class="frame-caption"><h3>Vascular Anatomy</h3><p>3 photographs<span>View album</span></p></div>
+          </article>
+        </div>
+        <div class="work-foot">
+          <p>There is no right way through the archive. Follow whatever catches your eye.</p>
+          <button class="surprise" type="button" hidden>Surprise me <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 20 4M4 4h16v16"/></svg></button>
+        </div>
+        <div class="album-library" aria-label="Browse all photographs">
         <details class="album" id="album-europe">
           <summary><h3>Europe</h3><span class="album-count">23 photographs</span><span class="album-toggle" aria-hidden="true">+</span></summary>
           <div class="album-grid">
@@ -910,6 +1020,7 @@
             </figure>
           </div>
         </details>
+        </div>
       </section>
 
       <section id="about" class="text-section" aria-labelledby="about-title">

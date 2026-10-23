@@ -12,17 +12,21 @@ class PhotoLinks(HTMLParser):
     def __init__(self):
         super().__init__()
         self.source = None
+        self.size = 640
         self.photos = {}
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == "a" and "data-photo" in attrs:
             self.source = attrs["href"]
+            self.size = int(attrs.get("data-preview-size", 1280 if len(self.photos) < 4 else 640))
         elif tag == "img" and self.source:
             # Featured images appear first and receive larger previews.
             if self.source not in self.photos:
-                size = 1280 if len(self.photos) < 4 else 640
-                self.photos[self.source] = (attrs["src"], size)
+                self.photos[self.source] = (attrs["src"], self.size)
+            else:
+                preview, size = self.photos[self.source]
+                self.photos[self.source] = (preview, max(size, self.size))
 
     def handle_endtag(self, tag):
         if tag == "a":
