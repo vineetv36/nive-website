@@ -1,50 +1,8 @@
 (() => {
   'use strict';
 
-  const masthead = document.querySelector('.masthead');
-  const updateHeaderHeight = () => {
-    document.documentElement.style.setProperty('--header-height', `${masthead.getBoundingClientRect().height}px`);
-  };
-  updateHeaderHeight();
-  if (typeof ResizeObserver === 'function') {
-    new ResizeObserver(updateHeaderHeight).observe(masthead);
-  } else {
-    window.addEventListener('resize', updateHeaderHeight);
-  }
-
   const photos = [...document.querySelectorAll('[data-photo]')];
-  document.querySelectorAll('[data-photo], [data-preview]').forEach(photo => {
-    photo.dataset.source = photo.dataset.original || photo.getAttribute('href');
-    const preview = photo.querySelector('img');
-    photo.style.setProperty('--photo-ratio', `${preview.getAttribute('width')} / ${preview.getAttribute('height')}`);
-    const loaded = () => {
-      if (preview.isConnected) photo.dataset.available = 'true';
-    };
-    const failed = () => {
-      // Derivatives are optional: retry the untouched original if a preview is absent.
-      if (!preview.dataset.originalFallback) {
-        preview.dataset.originalFallback = 'true';
-        preview.src = photo.dataset.source;
-      } else {
-        if (photo.hasAttribute('data-preview')) {
-          photo.dataset.available = 'false';
-          preview.remove();
-        } else {
-          markMissing(photo);
-        }
-      }
-    };
-    preview.addEventListener('load', loaded);
-    preview.addEventListener('error', failed);
-    if (preview.complete) {
-      if (preview.naturalWidth) loaded();
-      else failed();
-    }
-
-  });
-
   const dialog = document.querySelector('.lightbox');
-  if (!dialog) return;
   const image = dialog.querySelector('.lightbox-image');
   const title = dialog.querySelector('#lightbox-title');
   const status = dialog.querySelector('.lightbox-status');
@@ -136,6 +94,28 @@
   }
 
   photos.forEach(photo => {
+    photo.dataset.source = photo.getAttribute('href');
+    const preview = photo.querySelector('img');
+    photo.style.setProperty('--photo-ratio', `${preview.getAttribute('width')} / ${preview.getAttribute('height')}`);
+    const loaded = () => {
+      if (preview.isConnected) photo.dataset.available = 'true';
+    };
+    const failed = () => {
+      // Derivatives are optional: retry the untouched original if a preview is absent.
+      if (!preview.dataset.originalFallback) {
+        preview.dataset.originalFallback = 'true';
+        preview.src = photo.dataset.source;
+      } else {
+        markMissing(photo);
+      }
+    };
+    preview.addEventListener('load', loaded);
+    preview.addEventListener('error', failed);
+    if (preview.complete) {
+      if (preview.naturalWidth) loaded();
+      else failed();
+    }
+
     photo.addEventListener('click', event => {
       if (photo.dataset.available === 'false') {
         event.preventDefault();
