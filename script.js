@@ -1,6 +1,17 @@
 (() => {
   'use strict';
 
+  const masthead = document.querySelector('.masthead');
+  const updateHeaderHeight = () => {
+    document.documentElement.style.setProperty('--header-height', `${masthead.getBoundingClientRect().height}px`);
+  };
+  updateHeaderHeight();
+  if (typeof ResizeObserver === 'function') {
+    new ResizeObserver(updateHeaderHeight).observe(masthead);
+  } else {
+    window.addEventListener('resize', updateHeaderHeight);
+  }
+
   const photos = [...document.querySelectorAll('[data-photo]')];
   const dialog = document.querySelector('.lightbox');
   const image = dialog.querySelector('.lightbox-image');
