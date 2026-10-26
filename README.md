@@ -23,7 +23,7 @@ The opening gallery uses the supplied photos that match the design reference:
 | San Francisco | `assets/San-Francisco/003.webp` |
 | Liquid Lens | `assets/Liquid-Lens/001.webp` |
 
-Below the opening gallery, **Selected observations** adapts the supplied reference website’s “Things worth a second look” section: staggered album covers, category filters, and a “Surprise me” button. Each of the 11 covers opens its complete album. Filters change the visible covers, and Surprise me chooses from that selection. Previous/next and arrow keys stay within the selected album in numbered-file order. Escape and the close button restore focus and scrolling. Without JavaScript or native dialog support, a complete expandable album library remains available below the covers; ordinary links open originals.
+Below the opening gallery, **Things worth a second look** adapts the supplied reference website’s “Things worth a second look” section: staggered album covers and category filters. Each of the 11 covers opens its complete album. Filters change the visible covers. Previous/next and arrow keys stay within the selected album in numbered-file order. Escape and the close button restore focus and scrolling. Without JavaScript or native dialog support, a complete expandable album library remains available below the covers; ordinary links open originals.
 
 | Folder | Images |
 | --- | ---: |
@@ -61,12 +61,12 @@ python3 tools/refresh_previews.py
 
 This command reads the photo paths in `index.html` and writes only beneath `assets/optimized/`. It never overwrites originals. Commit changed previews alongside updated originals to avoid stale thumbnails. To omit a preview permanently, point its `<img src>` to the original and remove that photo from the optional regeneration workflow (the script deliberately refuses to overwrite originals).
 
-Edit About and Contact in `index.html`. The supplied Behance profile is linked; add a real email address there when available. The reference image is kept separate from site artwork. The Selected observations section uses the Instrument Serif and JetBrains Mono font files supplied with the reference website, served locally from `assets/fonts/`; its styling is scoped to that section.
+Edit About and Contact in `index.html`. The supplied Behance profile is linked; add a real email address there when available. The reference image is kept separate from site artwork. The album gallery uses the Instrument Serif and JetBrains Mono font files supplied with the reference website, served locally from `assets/fonts/`; its styling is scoped to that section.
 
 ## Validation
 
 Verified all 112 thumbnails and original images in Chromium, album order and wraparound, keyboard focus and scroll restoration, layouts at 320/390/768/1536px, no-JavaScript album links, and missing-preview/original fallbacks. Initial page loading requests only the four cover previews. Preview regeneration was run and all original files still match the supplied SHA-256 inventory.
 
-The replacement section was also checked at all four widths, with category counts and layout reflow, Surprise me within the selected category, all 112 originals through the new covers, reduced motion, and the no-JavaScript fallback.
+The replacement section was also checked at all four widths, with category counts and layout reflow, all 112 originals through the new covers, reduced motion, and the no-JavaScript fallback.
 
 Check desktop, tablet, and mobile layouts; open each album; navigate its images with buttons and arrow keys; test Tab, Shift+Tab, Escape, focus return, and scroll restoration. Check ordinary image links with JavaScript disabled and subdirectory hosting. Direct `file://` navigation is blocked by the managed test browser, so direct-file loading remains unverified in this environment.

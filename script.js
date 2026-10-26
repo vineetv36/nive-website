@@ -27,12 +27,10 @@
   const work = document.querySelector('.selected-work');
   const cards = [...work.querySelectorAll('.work-card')];
   const filters = [...work.querySelectorAll('.work-filter')];
-  const surprise = work.querySelector('.surprise');
   const canOpenDialog = typeof dialog.showModal === 'function';
   // Keep the full album library browsable without JavaScript or dialog support.
   if (canOpenDialog) work.classList.add('gallery-enhanced');
   work.querySelector('.work-filters').hidden = false;
-  surprise.hidden = !canOpenDialog;
 
   filters.forEach(button => button.addEventListener('click', () => {
     const filter = button.dataset.filter;
@@ -49,21 +47,14 @@
     work.querySelector('#filter-status').textContent = `${slot} ${slot === 1 ? 'album' : 'albums'} shown`;
   }));
 
-  function openPhoto(photo, focusTarget = photo) {
-    trigger = focusTarget;
+  function openPhoto(photo) {
+    trigger = photo;
     showPhoto(photo);
     savedOverflow = document.documentElement.style.overflow;
     dialog.showModal();
     document.documentElement.style.overflow = 'hidden';
     close.focus();
   }
-
-  surprise.addEventListener('click', () => {
-    const choices = cards.filter(card => !card.hidden)
-      .map(card => card.querySelector('[data-photo]'))
-      .filter(photo => photo.dataset.available !== 'false');
-    if (choices.length) openPhoto(choices[Math.floor(Math.random() * choices.length)], surprise);
-  });
 
   // Featured covers and album thumbnails can refer to the same original.
   function available() {

@@ -150,7 +150,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
   .invitation, figcaption { transition: color .15s ease; }
 }
 
-/* Selected observations — adapted from the supplied reference website. */
+/* Album gallery — adapted from the supplied reference website. */
 @font-face {
   font-family: "Instrument Serif";
   src: url("assets/fonts/instrument-serif-400-normal.woff2") format("woff2");
@@ -184,8 +184,6 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
 .selected-work [hidden] { display: none !important; }
 .gallery-enhanced .album-library { display: none; }
 .work-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(270px, .58fr); gap: clamp(40px, 8vw, 140px); align-items: end; margin-bottom: clamp(60px, 9vw, 120px); }
-.work-label { display: flex; align-items: center; gap: 11px; margin-bottom: clamp(28px, 4vw, 54px); color: var(--work-muted); font: 400 10px/1 var(--work-mono); letter-spacing: .14em; text-transform: uppercase; }
-.work-label > span { display: grid; place-items: center; width: 26px; height: 26px; flex: 0 0 26px; border: 1px solid rgb(32 32 32 / 40%); border-radius: 50%; color: var(--ink); font-size: 9px; }
 .work-title { margin: 0; font-family: var(--work-serif); font-size: clamp(3.6rem, 7.5vw, 8.4rem); font-weight: 400; line-height: .88; letter-spacing: -.045em; }
 .work-title em { font-style: italic; }
 .work-intro { padding-bottom: 6px; }
@@ -215,16 +213,12 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
 .frame-media img { object-fit: cover; }
 .frame-index { position: absolute; top: 13px; left: 14px; z-index: 1; display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: var(--paper); color: var(--ink); font: 400 9px/1 var(--work-mono); opacity: 0; pointer-events: none; }
 .view-tag { position: absolute; right: 14px; bottom: 14px; z-index: 1; display: inline-flex; align-items: center; gap: 8px; padding: 10px 13px 9px; border-radius: 999px; background: var(--work-accent); color: var(--ink); font: 400 10px/1 var(--work-mono); letter-spacing: .04em; opacity: 0; pointer-events: none; }
-.view-tag svg, .surprise svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.view-tag svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .frame-media:hover .frame-index, .frame-media:focus-visible .frame-index, .frame-media:hover .view-tag, .frame-media:focus-visible .view-tag { opacity: 1; }
 .frame-caption { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding-top: 12px; }
 .frame-caption h3 { margin: 0; font-family: var(--work-serif); font-size: clamp(1.28rem, 1.8vw, 1.75rem); font-weight: 400; line-height: 1.15; letter-spacing: -.015em; }
 .frame-caption p { flex: 0 0 auto; margin: 0; color: var(--work-muted); font: 400 9px/1.4 var(--work-mono); letter-spacing: .04em; text-align: right; text-transform: uppercase; }
 .frame-caption p span { display: block; margin-top: 3px; }
-.work-foot { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-top: clamp(70px, 10vw, 150px); padding-top: 24px; border-top: 1px solid var(--work-line); }
-.work-foot p { max-width: 400px; margin: 0; color: var(--work-muted); font-family: var(--work-serif); font-size: clamp(1.15rem, 1.7vw, 1.5rem); font-style: italic; }
-.surprise { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding: 15px 20px 14px; border: 1px solid var(--ink); border-radius: 999px; background: transparent; color: var(--ink); font: 400 10px/1 var(--work-mono); letter-spacing: .07em; text-transform: uppercase; cursor: pointer; }
-.surprise:hover { background: var(--ink); color: var(--paper); }
 .album-library { margin-top: 60px; }
 @media (max-width: 900px) {
   .work-head { grid-template-columns: 1fr; gap: 38px; }
@@ -243,8 +237,6 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
   .work-card[data-slot="3"], .work-card[data-slot="7"] { width: 82%; }
   .frame-caption { gap: 10px; }
   .frame-caption p { font-size: 8px; }
-  .work-foot { display: block; }
-  .surprise { margin-top: 28px; }
 }
 @media (hover: none) {
   .view-tag { opacity: 1; }
@@ -253,5 +245,5 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
   .frame-media img { transition: transform .7s ease; }
   .frame-media:hover img { transform: scale(1.025); }
   .frame-index, .view-tag { transition: opacity .25s ease; }
-  .work-filter, .surprise { transition: background-color .25s ease, color .25s ease; }
+  .work-filter { transition: background-color .25s ease, color .25s ease; }
 }
