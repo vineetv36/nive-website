@@ -23,7 +23,7 @@ The opening gallery uses the supplied photos that match the design reference:
 | San Francisco | `assets/San-Francisco/003.webp` |
 | Liquid Lens | `assets/Liquid-Lens/001.webp` |
 
-Below the opening gallery, **What catches your eye?** introduces the album gallery adapted from the supplied reference website: staggered album covers and category filters. Each of the 11 covers opens its complete album. Filters change the visible covers. Previous/next and arrow keys stay within the selected album in numbered-file order. Escape and the close button restore focus and scrolling. Without JavaScript or native dialog support, a complete expandable album library remains available below the covers; ordinary links open originals.
+Below the opening gallery, **Things worth a second look** adapts the supplied reference website’s “Things worth a second look” section: staggered album covers and category filters. Each of the 11 covers opens its complete album. Filters change the visible covers. Previous/next and arrow keys stay within the selected album in numbered-file order. Escape and the close button restore focus and scrolling. Without JavaScript or native dialog support, a complete expandable album library remains available below the covers; ordinary links open originals.
 
 | Folder | Images |
 | --- | ---: |
