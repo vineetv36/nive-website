@@ -28,7 +28,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 nav { display: flex; align-items: center; gap: 48px; font-family: var(--mono); font-size: 17px; }
 nav a { display: inline-flex; align-items: center; min-height: 44px; }
 nav a:hover, .contact-link:hover { text-decoration: underline; text-underline-offset: 6px; }
-.hero { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; padding: 33px 0 16px; }
+.hero { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; padding: 33px 0 40px; }
 h1 { margin: 0 0 0 -5px; font-size: clamp(64px, 8.14vw, 125px); font-weight: 800; letter-spacing: -.065em; line-height: .79; }
 .hero-note { flex: 0 0 240px; max-width: 240px; margin: 32px 0 0; font: 18px/1.4 var(--mono); }
 .hero-note::after { content: ""; display: block; width: 40px; height: 1px; margin-top: 22px; background: var(--rule); }
