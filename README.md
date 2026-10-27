@@ -14,14 +14,14 @@ The site uses relative paths and supports subdirectory hosting. Upload `index.ht
 
 ## Collection
 
-The opening gallery uses the supplied photos that match the design reference:
+The opening gallery uses these selected album photos:
 
 | Cover | Original |
 | --- | --- |
-| Europe | `assets/Europe/007.webp` |
-| Botanical | `assets/Botanical/003.webp` |
+| Places — Europe 15/23 | `assets/Europe/015.webp` |
+| Reflections — Light on Head 3/10 | `assets/Light-on-Head/003.webp` |
 | San Francisco | `assets/San-Francisco/003.webp` |
-| Liquid Lens | `assets/Liquid-Lens/001.webp` |
+| Experiments — Vascular Anatomy 1/3 | `assets/Vascular-Anatomy/001.webp` |
 
 Below the opening gallery, **What catches your eye?** introduces the album gallery adapted from the supplied reference website: staggered album covers and category filters. Each of the 11 covers opens its complete album. Filters change the visible covers. Previous/next and arrow keys stay within the selected album in numbered-file order. Escape and the close button restore focus and scrolling. Without JavaScript or native dialog support, a complete expandable album library remains available below the covers; ordinary links open originals.
 
