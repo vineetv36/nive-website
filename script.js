@@ -32,10 +32,9 @@
   if (canOpenDialog) work.classList.add('gallery-enhanced');
   work.querySelector('.work-filters').hidden = false;
 
-  filters.forEach(button => button.addEventListener('click', () => {
-    const filter = button.dataset.filter;
+  function selectFilter(filter) {
     filters.forEach(item => {
-      const selected = item === button;
+      const selected = item.dataset.filter === filter;
       item.classList.toggle('is-active', selected);
       item.setAttribute('aria-pressed', String(selected));
     });
@@ -45,10 +44,13 @@
       if (!card.hidden) card.dataset.slot = String(slot++ % 9 + 1);
     });
     work.querySelector('#filter-status').textContent = `${slot} ${slot === 1 ? 'album' : 'albums'} shown`;
-  }));
+  }
 
-  function openPhoto(photo) {
-    trigger = photo;
+  filters.forEach(button => button.addEventListener('click', () => selectFilter(button.dataset.filter)));
+
+  function openPhoto(photo, focusTarget = photo) {
+    trigger = focusTarget;
+    trigger.focus({ preventScroll: true });
     showPhoto(photo);
     savedOverflow = document.documentElement.style.overflow;
     dialog.showModal();
@@ -126,7 +128,16 @@
       // Preserve ordinary original-image links and modified clicks.
       if (!canOpenDialog || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
       event.preventDefault();
-      openPhoto(photo);
+      let focusTarget = photo;
+      if (photo.closest('.observation')) {
+        selectFilter('all');
+        const card = cards.find(item => item.querySelector('[data-photo]').dataset.album === photo.dataset.album);
+        if (card) {
+          card.scrollIntoView({ behavior: 'instant', block: 'start' });
+          focusTarget = card.querySelector('[data-photo]');
+        }
+      }
+      openPhoto(photo, focusTarget);
     });
   });
 
