@@ -376,7 +376,7 @@ figcaption { display: flex; align-items: center; gap: 12px; flex: 0 0 46px; font
   grid-row: 1;
   max-width: 340px;
   margin: 0 0 0 auto;
-  font: 400 16px/1.4 "Helvetica Neue", Arial, sans-serif;
+  font: 400 16px/1.4 "Archive Mono", var(--mono);
   text-align: right;
 }
 .contact-section h2 {
