@@ -357,11 +357,14 @@ figcaption { display: flex; align-items: center; gap: 12px; flex: 0 0 46px; font
 .masthead::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); pointer-events: none; }
 #albums-title, #about-image { scroll-margin-top: 8px; }
 
-/* Contact typography and palette from the supplied reference. */
+/* Compact Contact section with the reference's palette and serif type. */
 .contact-section {
   position: relative;
-  min-height: 88svh;
-  padding: clamp(70px, 9vw, 120px) 0 clamp(28px, 4vw, 46px);
+  display: grid;
+  grid-template-columns: 3fr 4fr 3fr;
+  align-items: center;
+  gap: 16px;
+  padding-block: 24px;
   background: #121210;
   color: var(--paper);
   box-shadow: 0 0 0 100vmax #121210;
@@ -369,66 +372,33 @@ figcaption { display: flex; align-items: center; gap: 12px; flex: 0 0 46px; font
   scroll-margin-top: 24px;
 }
 .contact-availability {
-  max-width: 300px;
+  grid-column: 3;
+  grid-row: 1;
+  max-width: 340px;
   margin: 0 0 0 auto;
-  font: 400 12px/1.6 "Helvetica Neue", Arial, sans-serif;
+  font: 400 16px/1.4 "Helvetica Neue", Arial, sans-serif;
   text-align: right;
-}
-.contact-section h2 {
-  margin: clamp(20px, 4vw, 50px) 0 0;
-  font-family: "Instrument Serif", "Times New Roman", serif;
-  font-size: clamp(4rem, 10.6vw, 11.5rem);
-  font-weight: 400;
-  line-height: .84;
-  letter-spacing: -.05em;
-}
-.contact-section > p:last-child { margin: 0; }
-.contact-section .contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: clamp(40px, 6vw, 80px);
-  padding: 0 0 8px;
-  border-bottom: 1px solid rgb(245 243 239 / 45%);
-  font: 400 clamp(1.25rem, 2.4vw, 2.3rem)/1.55 "Instrument Serif", "Times New Roman", serif;
-}
-.contact-section .contact-link:hover { color: #d8ff44; border-color: currentColor; text-decoration: none; }
-.contact-section :focus-visible { outline-color: var(--paper); }
-@media (max-width: 620px) {
-  .contact-section { min-height: auto; padding-block: 74px; }
-}
-
-/* Keep Contact as compact as the original closing row. */
-.contact-section {
-  display: grid;
-  grid-template-columns: 3fr 4fr 3fr;
-  align-items: center;
-  gap: 16px;
-  min-height: 0;
-  padding-block: 48px;
 }
 .contact-section h2 {
   grid-column: 1;
   grid-row: 1;
   margin: 0;
-  font-size: clamp(22px, 2.2vw, 32px);
-  line-height: 1.35;
+  font: 400 clamp(18px, 1.5vw, 22px)/1.35 "Instrument Serif", "Times New Roman", serif;
   letter-spacing: -.025em;
 }
-.contact-section > p:last-child { grid-column: 2; grid-row: 1; }
+.contact-section > p:last-child { grid-column: 2; grid-row: 1; margin: 0; }
 .contact-section .contact-link {
-  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   padding-block: 5px;
-  gap: 12px;
-  font-size: clamp(22px, 2.2vw, 32px);
-  line-height: 1.35;
+  border-bottom: 1px solid rgb(245 243 239 / 45%);
+  font: 400 clamp(18px, 1.5vw, 22px)/1.35 "Instrument Serif", "Times New Roman", serif;
 }
-.contact-availability { grid-column: 3; grid-row: 1; }
+.contact-section .contact-link:hover { color: #d8ff44; border-color: currentColor; text-decoration: none; }
+.contact-section :focus-visible { outline-color: var(--paper); }
 @media (max-width: 600px) {
-  .contact-section { grid-template-columns: 1fr; gap: 20px; padding-block: 30px; }
-  .contact-section h2, .contact-section > p:last-child, .contact-availability { grid-column: 1; grid-row: auto; }
-  .contact-section h2 { order: 0; }
-  .contact-section > p:last-child { order: 1; }
-  .contact-availability { order: 2; }
-  .contact-section .contact-link { font-size: 24px; }
+  .contact-section { grid-template-columns: 1fr 2fr; gap: 12px; padding-block: 18px; }
+  .contact-section > p:last-child { justify-self: end; }
+  .contact-availability { grid-column: 1 / -1; grid-row: 2; }
 }
