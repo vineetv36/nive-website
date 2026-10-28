@@ -356,3 +356,44 @@ figcaption { display: flex; align-items: center; gap: 12px; flex: 0 0 46px; font
 /* Cover artwork at the page edges as it passes behind the sticky masthead. */
 .masthead::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); pointer-events: none; }
 #albums-title, #about-image { scroll-margin-top: 8px; }
+
+/* Contact typography and palette from the supplied reference. */
+.contact-section {
+  position: relative;
+  min-height: 88svh;
+  padding: clamp(70px, 9vw, 120px) 0 clamp(28px, 4vw, 46px);
+  background: #121210;
+  color: var(--paper);
+  box-shadow: 0 0 0 100vmax #121210;
+  clip-path: inset(0 -100vmax);
+  scroll-margin-top: 24px;
+}
+.contact-availability {
+  max-width: 300px;
+  margin: 0 0 0 auto;
+  font: 400 12px/1.6 "Helvetica Neue", Arial, sans-serif;
+  text-align: right;
+}
+.contact-section h2 {
+  margin: clamp(20px, 4vw, 50px) 0 0;
+  font-family: "Instrument Serif", "Times New Roman", serif;
+  font-size: clamp(4rem, 10.6vw, 11.5rem);
+  font-weight: 400;
+  line-height: .84;
+  letter-spacing: -.05em;
+}
+.contact-section > p:last-child { margin: 0; }
+.contact-section .contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: clamp(40px, 6vw, 80px);
+  padding: 0 0 8px;
+  border-bottom: 1px solid rgb(245 243 239 / 45%);
+  font: 400 clamp(1.25rem, 2.4vw, 2.3rem)/1.55 "Instrument Serif", "Times New Roman", serif;
+}
+.contact-section .contact-link:hover { color: #d8ff44; border-color: currentColor; text-decoration: none; }
+.contact-section :focus-visible { outline-color: var(--paper); }
+@media (max-width: 620px) {
+  .contact-section { min-height: auto; padding-block: 74px; }
+}
