@@ -12,8 +12,8 @@
     window.addEventListener('resize', updateHeaderHeight);
   }
 
-  // Leave enough room below the last section to align its heading under the header.
-  document.querySelectorAll('a[href="#albums-title"], a[href="#about-title"]').forEach(link => {
+  // Leave enough room below the last section to align its target under the header.
+  document.querySelectorAll('a[href="#albums-title"], a[href="#about-image"]').forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
       const heading = document.querySelector(link.getAttribute('href'));

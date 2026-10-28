@@ -358,4 +358,4 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
 
 /* Cover artwork at the page edges as it passes behind the sticky masthead. */
 .masthead::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); pointer-events: none; }
-#albums-title, #about-title { scroll-margin-top: 8px; }
+#albums-title, #about-image { scroll-margin-top: 8px; }
