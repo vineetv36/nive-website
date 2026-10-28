@@ -356,32 +356,3 @@ figcaption { display: flex; align-items: center; gap: 12px; flex: 0 0 46px; font
 /* Cover artwork at the page edges as it passes behind the sticky masthead. */
 .masthead::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); pointer-events: none; }
 #albums-title, #about-image { scroll-margin-top: 8px; }
-
-/* Dark closing section, using the supplied reference's ink and serif face. */
-.about, #contact {
-  background: #121210;
-  color: var(--paper);
-  box-shadow: 0 0 0 100vmax #121210;
-  clip-path: inset(0 -100vmax);
-}
-.about {
-  --line: rgb(245 243 239 / 25%);
-  --muted: var(--paper);
-  column-gap: clamp(44px, 8vw, 128px);
-  row-gap: clamp(28px, 4vw, 50px);
-  padding-top: clamp(40px, 6vw, 80px);
-}
-.about-availability {
-  grid-column: 1 / -1;
-  justify-self: end;
-  max-width: 300px;
-  margin: 0;
-  color: var(--paper);
-  font: 400 12px/1.6 "Helvetica Neue", Arial, sans-serif;
-  text-align: right;
-}
-.about-text p, .about-facts dt { color: var(--paper); }
-.about-copy h2 { font-family: "Instrument Serif", "Times New Roman", serif; font-style: normal; }
-#contact { border-color: rgb(245 243 239 / 25%); }
-#contact .contact-link { font-family: "Instrument Serif", "Times New Roman", serif; font-weight: 400; }
-.about :focus-visible, #contact :focus-visible { outline-color: var(--paper); }
