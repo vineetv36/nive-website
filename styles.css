@@ -276,10 +276,8 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
 
 .about-media img {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: 62% 50%;
-  filter: saturate(0.68) contrast(1.04);
+  aspect-ratio: 2875 / 2916;
+  object-fit: contain;
 }
 
 
