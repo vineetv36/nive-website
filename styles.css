@@ -355,3 +355,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
   .about-copy h2 { font-size: clamp(3rem, 13.5vw, 4.5rem); }
 }
 @media (prefers-reduced-motion: reduce) { .about-links a span { transition: none; } }
+
+/* Cover artwork at the page edges as it passes behind the sticky masthead. */
+.masthead::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); pointer-events: none; }
+#albums-title, #about-title { scroll-margin-top: 8px; }

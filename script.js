@@ -12,6 +12,22 @@
     window.addEventListener('resize', updateHeaderHeight);
   }
 
+  // Leave enough room below the last section to align its heading under the header.
+  document.querySelectorAll('a[href="#albums-title"], a[href="#about-title"]').forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const heading = document.querySelector(link.getAttribute('href'));
+      const existingPadding = parseFloat(document.body.style.paddingBottom) || 0;
+      const targetTop = heading.getBoundingClientRect().top + window.scrollY;
+      const offset = masthead.getBoundingClientRect().height + 8;
+      const contentHeight = document.documentElement.scrollHeight - existingPadding;
+      document.body.style.paddingBottom = `${Math.max(0, targetTop - offset + window.innerHeight - contentHeight)}px`;
+      history.pushState(null, '', link.getAttribute('href'));
+      heading.focus({ preventScroll: true });
+      heading.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
+  });
+
   const photos = [...document.querySelectorAll('[data-photo]')];
   const dialog = document.querySelector('.lightbox');
   const image = dialog.querySelector('.lightbox-image');
