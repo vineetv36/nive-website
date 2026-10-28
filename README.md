@@ -20,7 +20,7 @@ The opening gallery uses these selected album photos:
 | --- | --- |
 | Places — Europe 15/23 | `assets/Europe/015.webp` |
 | People — Light on Head 3/10 | `assets/Light-on-Head/003.webp` |
-| San Francisco | `assets/San-Francisco/003.webp` |
+| Passing moments — Europe 23/23 | `assets/Europe/023.webp` |
 | Experiments — Vascular Anatomy 1/3 | `assets/Vascular-Anatomy/001.webp` |
 
 Below the opening gallery, **What catches your eye?** introduces the album gallery adapted from the supplied reference website: staggered album covers and category filters. Each of the 11 covers opens its complete album. Europe uses image 22/23 as its gallery cover; Liquid Lens uses image 10/12. Clicking a featured photo resets the filter to All, scrolls to the matching album card, and opens the selected photo. Closing the lightbox returns focus to that album card. Filters change the visible covers. Previous/next and arrow keys stay within the selected album in numbered-file order. Escape and the close button restore focus and scrolling. Without JavaScript or native dialog support, a complete expandable album library remains available below the covers; ordinary links open originals.
